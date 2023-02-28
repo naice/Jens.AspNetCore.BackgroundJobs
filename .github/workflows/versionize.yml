@@ -5,7 +5,7 @@ name: Versionize All
 
 on:
   push:
-    tags: [ "v*" ]
+    branches: [ "master" ]
 
 jobs:
   build:

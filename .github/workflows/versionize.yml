@@ -49,10 +49,12 @@ jobs:
         git config --local user.email "im.naice@googlemail.com"
         git config --local user.name "Jens Marchewka"
     
-    - name: Versionize All
-      run: |
-        versionize --workingDir Jens.AspNetCore.BackgroundJobs --changelog-all --skip-commit
-        versionize --workingDir Jens.AspNetCore.BackgroundJobs.Abstractions --changelog-all --skip-dirty
+    - name: Versionize Jens.AspNetCore.BackgroundJobs
+      working-directory: Jens.AspNetCore.BackgroundJobs
+      run: versionize --changelog-all --skip-commit
+    - name: Versionize Jens.AspNetCore.BackgroundJobs.Abstractions
+      working-directory: Jens.AspNetCore.BackgroundJobs.Abstractions
+      run: versionize --changelog-all --skip-dirty
    
     - name: Push changes to GitHub
       uses: ad-m/github-push-action@master

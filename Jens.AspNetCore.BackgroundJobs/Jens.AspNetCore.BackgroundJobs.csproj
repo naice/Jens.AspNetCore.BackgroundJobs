@@ -1,10 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+  <Version>1.0.0</Version>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    
+
     <Authors>Jens Marchewka (im.naice@googlemail.com)</Authors>
     <Description>Auto spawning of background tasks based on a Job Queue.</Description>
     <Copyright>Jens Marchewka (im.naice@googlemail.com) 2023</Copyright>
@@ -13,7 +14,6 @@
     <RepositoryType>GIT</RepositoryType>
     <License>MIT</License>
     <RepositoryUrl>https://github.com/naice/Jens.AspNetCore.BackgroundJobs.git</RepositoryUrl>
-
   </PropertyGroup>
 
   <ItemGroup>

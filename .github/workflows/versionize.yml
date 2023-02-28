@@ -9,15 +9,28 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 7.0.x
+        
+    - name: Build and Publish Jens.AspNetCore.BackgroundJobs
+      working-directory: Jens.AspNetCore.BackgroundJobs
+      run: |
+        dotnet build
+        dotnet nuget push bin/**/*.nupkg --api-key ${{ secrets.JENS_NUGET_KEY }} --source https://api.nuget.org/v3/index.json
+        
+    - name: Build and Publish Jens.AspNetCore.BackgroundJobs.Abstractions
+      working-directory: Jens.AspNetCore.BackgroundJobs.Abstractions
+      run: |
+        dotnet build
+        dotnet nuget push bin/**/*.nupkg --api-key ${{ secrets.JENS_NUGET_KEY }} --source https://api.nuget.org/v3/index.json
     
     - name: Install Versionize
       run: dotnet tool install --global Versionize
@@ -30,7 +43,7 @@ jobs:
     - name: Versionize All
       run: |
         versionize --workingDir Jens.AspNetCore.BackgroundJobs --changelog-all --skip-commit
-        versionize --workingDir Jens.AspNetCore.BackgroundJobs.Abstractions --changelog-all --skip-commit
+        versionize --workingDir Jens.AspNetCore.BackgroundJobs.Abstractions --changelog-all --skip-dirty
    
     - name: Push changes to GitHub
       uses: ad-m/github-push-action@master

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    
+    <Authors>Jens Marchewka (im.naice@googlemail.com)</Authors>
+    <Description>Abstractions with minimal dependency set for Jens.AspNetCore.BackgroundJobs.</Description>
+    <Copyright>Jens Marchewka (im.naice@googlemail.com) 2023</Copyright>
+    <PackageProjectUrl>https://github.com/naice/Jens.AspNetCore.BackgroundJobs</PackageProjectUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <RepositoryType>GIT</RepositoryType>
+    <License>MIT</License>
+    <RepositoryUrl>https://github.com/naice/Jens.AspNetCore.BackgroundJobs.git</RepositoryUrl>
+  </PropertyGroup>
+
+</Project>

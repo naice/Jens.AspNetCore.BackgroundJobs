@@ -24,11 +24,13 @@ jobs:
     - name: Build and Publish Jens.AspNetCore.BackgroundJobs
       working-directory: Jens.AspNetCore.BackgroundJobs
       run: |
+        dotnet build
         dotnet pack
         dotnet nuget push *.nupkg --api-key ${{ secrets.JENS_NUGET_KEY }} --source https://api.nuget.org/v3/index.json
         
     - name: Build and Publish Jens.AspNetCore.BackgroundJobs.Abstractions
       working-directory: Jens.AspNetCore.BackgroundJobs.Abstractions
       run: |
+        dotnet build
         dotnet pack -o package.nupkg
         dotnet nuget push *.nupkg --api-key ${{ secrets.JENS_NUGET_KEY }} --source https://api.nuget.org/v3/index.json

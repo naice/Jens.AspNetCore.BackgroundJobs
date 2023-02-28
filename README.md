@@ -12,7 +12,7 @@ The [Abstractions](/Jens.AspNetCore.BackgroundJobs.Abstractions) library helps y
 
 # Sample Task Runner
 
-Please also see the Sample project for more detail.
+Please also see the [Sample](/Sample) project for more detail.
 
 ```csharp
 using System.Text.Json;

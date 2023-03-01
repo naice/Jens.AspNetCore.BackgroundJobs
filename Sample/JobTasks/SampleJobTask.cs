@@ -12,6 +12,8 @@ public class SampleJobTask : IJobTask
         _jobSource = jobSource;
     }
 
+    public CancellationToken CancellationToken { get; set; }
+
     public async Task<JobTaskResult> Run(Job job)
     {
         var param = JsonSerializer.Deserialize<SampleJobTaskParameter>(job.Parameter ?? "null");

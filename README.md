@@ -59,6 +59,8 @@ public class SampleContext : JobParameterContext<SampleJobTaskParameter>
 
 public class SampleJobTask : IJobTask
 {
+    public CancellationToken CancellationToken { get; set; }
+    
     private readonly IJobQueueSource _jobSource;
 
     public SampleJobTask(IJobQueueSource jobSource)

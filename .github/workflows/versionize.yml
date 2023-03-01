@@ -9,9 +9,8 @@ on:
 
 jobs:
   
-  build:
+  test:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
       with:
@@ -19,17 +18,18 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 7.0.x
-        
-    - name: Build Jens.AspNetCore.BackgroundJobs
-      working-directory: Jens.AspNetCore.BackgroundJobs
-      run: dotnet build
-        
-    - name: Build Jens.AspNetCore.BackgroundJobs.Abstractions
-      working-directory: Jens.AspNetCore.BackgroundJobs.Abstractions
-      run: dotnet build
+        dotnet-version: 7.0.x    
+    - name: Test
+      working-directory: Test
+      run: dotnet test /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
+    - name: Publish coverage report to coveralls.io
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }} 
+        path-to-lcov: Test/TestResults/coverage.info
 
   versionize-publish:
+    needs: test
     runs-on: ubuntu-latest
 
     steps:

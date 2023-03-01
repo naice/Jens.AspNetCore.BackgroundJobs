@@ -46,6 +46,14 @@ public class JobSpawnService<TJobTask> : BackgroundService
         _config = config;
     }
 
+    /// <summary>
+    /// For easier testing. 
+    /// </summary>
+    public Task ExecuteAsyncPublic(CancellationToken cancellationToken)
+    {
+        return this.ExecuteAsync(cancellationToken);
+    }
+
     protected override async Task ExecuteAsync(CancellationToken cancellationToken)
     {
         _logger.LogInformation("Job Spawn Service starting.");
@@ -85,6 +93,7 @@ public class JobSpawnService<TJobTask> : BackgroundService
 
             // get the job task
             var jobTask = (IJobTask)scope.ServiceProvider.GetRequiredService(_jobTaskType);
+            jobTask.CancellationToken = cancellationToken;
 
             // update actual begin time of job
             var jobBegin = DateTime.UtcNow;

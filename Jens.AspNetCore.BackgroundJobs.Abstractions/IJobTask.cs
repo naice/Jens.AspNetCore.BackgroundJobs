@@ -7,6 +7,11 @@ namespace Jens.AspNetCore.BackgroundJobs;
 public interface IJobTask
 {
     /// <summary>
+    /// The <see cref="CancellationToken"/> for the <see cref="IJobTask"/>.
+    /// </summary>
+    CancellationToken CancellationToken { get; set; }
+
+    /// <summary>
     /// Runs the given <see cref="Job"/>. All exceptions are catched and stored to <see cref="Job.Message"/> as well as an status change.
     /// </summary>
     /// <param name="job">The <see cref="Job"/> to run.</param>

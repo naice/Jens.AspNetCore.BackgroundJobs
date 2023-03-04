@@ -58,6 +58,14 @@ jobs:
       if: steps.versionize.outcome != 'success'
       run: echo "Skipping publishing. No release required."
 
+    - name: Push changes to GitHub 
+      if: steps.versionize.outcome == 'success'
+      uses: ad-m/github-push-action@master 
+      with: 
+        github_token: ${{ secrets.GITHUB_TOKEN }} 
+        branch: ${{ github.ref }} 
+        tags: true
+
     - name: Build and Publish Jens.AspNetCore.BackgroundJobs
       if: steps.versionize.outcome == 'success'
       working-directory: Jens.AspNetCore.BackgroundJobs

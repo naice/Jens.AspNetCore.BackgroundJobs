@@ -48,28 +48,25 @@ jobs:
       run: |
         git config --local user.email "im.naice@googlemail.com"
         git config --local user.name "Jens Marchewka"
-    
-    - name: Versionize Jens.AspNetCore.BackgroundJobs
-      working-directory: Jens.AspNetCore.BackgroundJobs
-      run: versionize --changelog-all --skip-commit
-    - name: Versionize Jens.AspNetCore.BackgroundJobs.Abstractions
-      working-directory: Jens.AspNetCore.BackgroundJobs.Abstractions
-      run: versionize --changelog-all --skip-dirty
-   
-    - name: Push changes to GitHub
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: ${{ github.ref }}
-        tags: true
-        
-    - name: Build and Jens.AspNetCore.BackgroundJobs
+
+    - name: Versionize
+      id: versionize
+      run: versionize --changelog-all --exit-insignificant-commits
+      continue-on-error: true
+
+    - name: No release required
+      if: steps.versionize.outcome != 'success'
+      run: echo "Skipping publishing. No release required."
+
+    - name: Build and Publish Jens.AspNetCore.BackgroundJobs
+      if: steps.versionize.outcome == 'success'
       working-directory: Jens.AspNetCore.BackgroundJobs
       run: |
         dotnet build
         dotnet nuget push bin/**/*.nupkg --api-key ${{ secrets.JENS_NUGET_KEY }} --source https://api.nuget.org/v3/index.json
         
     - name: Build and Publish Jens.AspNetCore.BackgroundJobs.Abstractions
+      if: steps.versionize.outcome == 'success'
       working-directory: Jens.AspNetCore.BackgroundJobs.Abstractions
       run: |
         dotnet build

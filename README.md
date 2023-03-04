@@ -5,6 +5,7 @@
 # Jens.AspNetCoreBackgroundJobs
 
 ![x](https://img.shields.io/badge/License-MIT-blue.svg)
+[![Coverage Status](https://coveralls.io/repos/github/naice/Jens.AspNetCore.BackgroundJobs/badge.svg?branch=master)](https://coveralls.io/github/naice/Jens.AspNetCore.BackgroundJobs?branch=master)
 
 Auto spawning of background tasks based on a Job Queue.
 

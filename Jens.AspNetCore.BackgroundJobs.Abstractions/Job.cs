@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Jens.AspNetCore.BackgroundJobs;
 
 /// <summary>
@@ -8,6 +10,7 @@ public class Job
     /// <summary>
     /// The Identifier.
     /// </summary>
+    [Key]
     public Guid Id { get; set; }
     /// <summary>
     /// This is the type name of the job task to launch when executing this job.

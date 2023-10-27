@@ -130,7 +130,7 @@ public class JobSpawnService<TJobTask> : BackgroundService
     {
         try
         {
-            await jobQueueSource.UpdateJob(job);
+            await jobQueueSource.UpdateJob(_jobTaskType, job);
             return true;
         }
         catch (Exception ex)

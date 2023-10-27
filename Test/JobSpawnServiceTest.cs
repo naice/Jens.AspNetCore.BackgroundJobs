@@ -24,7 +24,7 @@ public class JobSpawnServiceTest
         Mock<IServiceProvider> serviceProvider = new Mock<IServiceProvider>();
         Mock<IServiceScope> serviceScope = new Mock<IServiceScope>();
         Mock<IJobQueueSource> jobQueueSource = new Mock<IJobQueueSource>();
-        jobQueueSource.Setup(x => x.UpdateJob(It.IsAny<Job>())).Callback<Job>(x => {
+        jobQueueSource.Setup(x => x.UpdateJob(It.IsAny<Type>(), It.IsAny<Job>())).Callback<Type, Job>((_, x) => {
             jobsUpdated.Add(x.JsonClone());
         });
         serviceScope.Setup(x => x.ServiceProvider.GetService(typeof(IJobQueueSource))).Returns(jobQueueSource.Object);
@@ -175,7 +175,7 @@ public class JobSpawnServiceTest
         var job = new Job() { Begin = DateTime.MinValue, Status = JobStatus.CREATED };
         wired.jobQueueSource.Reset();
         wired.jobQueueSource.Setup(x => x.GetNextJob(typeof(MockJobTask))).ReturnsAsync(job);
-        wired.jobQueueSource.Setup(x => x.UpdateJob(It.IsAny<Job>())).ThrowsAsync(new Exception(EXCEPTION_ID));
+        wired.jobQueueSource.Setup(x => x.UpdateJob(It.IsAny<Type>(), It.IsAny<Job>())).ThrowsAsync(new Exception(EXCEPTION_ID));
         await wired.service.ExecuteAsyncPublic(CancellationToken.None);
         
         job.ActualBegin.Should().NotBeNull("job execution was about to start.");

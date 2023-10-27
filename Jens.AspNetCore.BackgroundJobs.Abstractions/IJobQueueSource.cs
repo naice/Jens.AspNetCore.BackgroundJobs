@@ -8,7 +8,7 @@ public interface IJobQueueSource
     /// <summary>
     /// Updates the given <see cref="Job"/> with your data source. 
     /// </summary>
-    Task UpdateJob(Job job);
+    Task UpdateJob(Type jobTaskType, Job job);
     
     /// <summary>
     /// Gets the next <see cref="Job"/> from your data source, that corresponds to the given job task type.

@@ -19,7 +19,7 @@ public class ITJobQueueSource : IJobQueueSource
         return Task.FromResult<Job?>(Queue.Dequeue());
     }
 
-    public Task UpdateJob(Job job)
+    public Task UpdateJob(Type jobTaskType, Job job)
     {
         UpdatedJobs.Add(job.JsonClone());
         return Task.CompletedTask;

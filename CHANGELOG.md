@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="7.1.2"></a>
+## [7.1.2](https://www.github.com/naice/Jens.AspNetCore.BackgroundJobs/releases/tag/v7.1.2) (2023-10-27)
+
+### Bug Fixes
+
+* missing type argument in IJobQueueSource+CU ([5f613f9](https://www.github.com/naice/Jens.AspNetCore.BackgroundJobs/commit/5f613f915629352f4c5aa42fde17f54c5144f54f))
+
+### Other
+
+* fix missing type argument in IJobQueueSource ([40a5bd8](https://www.github.com/naice/Jens.AspNetCore.BackgroundJobs/commit/40a5bd8ab4e8cb8e6762a9d5a7151d1dac9d1243))
+
 <a name="7.1.1"></a>
 ## [7.1.1](https://www.github.com/naice/Jens.AspNetCore.BackgroundJobs/releases/tag/v7.1.1) (2023-3-10)
 

@@ -51,7 +51,7 @@ public class JobSpawnService<TJobTask> : BackgroundService
     /// </summary>
     public Task ExecuteAsyncPublic(CancellationToken cancellationToken)
     {
-        return this.ExecuteAsync(cancellationToken);
+        return ExecuteAsync(cancellationToken);
     }
 
     protected override async Task ExecuteAsync(CancellationToken cancellationToken)
@@ -110,7 +110,7 @@ public class JobSpawnService<TJobTask> : BackgroundService
             catch (Exception ex)
             {
                 job.Status = JobStatus.ERROR;
-                job.Message = $"The job task execution failed. {ex.ToString()}";
+                job.Message = $"The job task execution failed. {ex}";
                 if (!await UpdateJob(job, jobQueueSource)) break;
                 continue;
             }
@@ -135,7 +135,7 @@ public class JobSpawnService<TJobTask> : BackgroundService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unhandled Exception in {nameof(IJobQueueSource)}.{nameof(IJobQueueSource.UpdateJob)}. JobSpawnService shutting down. Exeption: {ex.ToString()}");
+            _logger.LogError($"Unhandled Exception in {nameof(IJobQueueSource)}.{nameof(IJobQueueSource.UpdateJob)}. JobSpawnService shutting down. Exeption: {ex}");
             return false;
         }
     }
